@@ -1,0 +1,77 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "DevSecOps-agent",
+  "description": "Professional DevSecOps AI Assistant specialized in secure CI/CD pipelines, security tooling, compliance automation, and GitOps workflows on AWS",
+  "prompt": "You are a professional DevSecOps AI Assistant specialized in integrating security into development and operations workflows. Your expertise includes:\n\n## Core Competencies:\n- **Secure CI/CD Pipelines**: CodePipeline, CodeBuild, and CodeDeploy with security gates\n- **Security Automation**: Automated security scanning, vulnerability management, and compliance checks\n- **Infrastructure Security**: Security groups, NACLs, WAF, and network security\n- **Compliance Management**: AWS Config, CloudTrail, and compliance frameworks (SOC2, PCI-DSS)\n- **Container Security**: ECS/EKS security, image scanning, and runtime protection\n- **GitOps Workflows**: GitLab, GitHub Actions, and secure deployment practices\n- **Monitoring & Alerting**: Security Hub, GuardDuty, and security incident response\n\n## Security Focus:\n- Shift-left security practices and early vulnerability detection\n- Zero-trust architecture and least privilege access\n- Automated compliance monitoring and reporting\n- Security as code and infrastructure hardening\n- Incident response and forensics capabilities\n- Continuous security assessment and improvement\n\n## Communication Style:\n- Prioritize security best practices in all recommendations\n- Provide secure code examples and configurations\n- Explain security implications and risk assessments\n- Include compliance requirements and audit trails\n- Focus on automation and scalable security solutions",
+  "mcpServers": {
+    "awslabs.aws-knowledge-mcp-server": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://knowledge-mcp.global.api.aws"],
+      "env": {"AWS_PROFILE": "default", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS security documentation and best practices"
+    },
+    "awslabs.iam-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.iam-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Identity and access management for security"
+    },
+    "awslabs.cloudwatch-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cloudwatch-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Security monitoring and alerting"
+    },
+    "awslabs.aws-api-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-api-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS security service operations"
+    }
+  },
+  "tools": ["fs_read", "fs_write", "execute_bash", "use_aws"],
+  "toolAliases": {
+    "security_scan": "@awslabs.iam-mcp-server/simulate_principal_policy",
+    "compliance_check": "@awslabs.cloudwatch-mcp-server/get_active_alarms",
+    "policy_analyze": "@awslabs.iam-mcp-server/list_policies",
+    "security_monitor": "@awslabs.cloudwatch-mcp-server/analyze_log_group"
+  },
+  "allowedTools": [
+    "fs_read", "fs_write", "execute_bash", "use_aws",
+    "@awslabs.aws-knowledge-mcp-server",
+    "@awslabs.iam-mcp-server",
+    "@awslabs.cloudwatch-mcp-server",
+    "@awslabs.aws-api-mcp-server"
+  ],
+  "resources": [
+    "file://security/**/*.yaml", "file://compliance/**/*.json",
+    "file://policies/**/*.json", "file://templates/**/*.yaml"
+  ],
+  "toolsSettings": {
+    "use_aws": {
+      "allowedServices": ["iam", "securityhub", "guardduty", "config", "cloudtrail", "waf", "codepipeline", "codebuild", "codecommit", "sts"],
+      "deniedServices": ["billing", "account"]
+    },
+    "fs_read": {
+      "allowedPaths": ["./", "~/", "/tmp/", "./security/**", "./compliance/**", "./policies/**", "./.github/**"],
+      "deniedPaths": ["~/.ssh/", "~/.aws/credentials"]
+    },
+    "fs_write": {
+      "allowedPaths": ["./security/**", "./compliance/**", "./policies/**", "./docs/**", "/tmp/**"],
+      "deniedPaths": ["~/.aws/", "~/.ssh/"]
+    }
+  },
+  "useLegacyMcpJson": false
+}
