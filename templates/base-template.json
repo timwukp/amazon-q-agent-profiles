@@ -1,0 +1,102 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "PERSONA-agent",
+  "description": "PERSONA_DESCRIPTION",
+  "prompt": "PERSONA_PROMPT",
+  "mcpServers": {
+    "awslabs.aws-knowledge-mcp-server": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://knowledge-mcp.global.api.aws"
+      ],
+      "env": {
+        "AWS_PROFILE": "default",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS knowledge base and documentation access"
+    }
+  },
+  "tools": [
+    "fs_read",
+    "fs_write",
+    "execute_bash",
+    "use_aws"
+  ],
+  "toolAliases": {},
+  "allowedTools": [
+    "fs_read",
+    "fs_write",
+    "execute_bash",
+    "use_aws",
+    "@awslabs.aws-knowledge-mcp-server"
+  ],
+  "resources": [
+    "file://README.md",
+    "file://.aws/config"
+  ],
+  "hooks": {
+    "agentSpawn": [
+      {
+        "command": "aws sts get-caller-identity --output json",
+        "timeout_ms": 10000,
+        "cache_ttl_seconds": 300
+      }
+    ],
+    "userPromptSubmit": [
+      {
+        "command": "date '+%Y-%m-%d %H:%M:%S %Z'",
+        "timeout_ms": 2000,
+        "cache_ttl_seconds": 60
+      }
+    ]
+  },
+  "toolsSettings": {
+    "execute_bash": {
+      "allowedCommands": [
+        "aws sts get-caller-identity",
+        "aws configure list"
+      ],
+      "deniedCommands": [
+        "rm -rf .*",
+        "sudo rm .*"
+      ],
+      "allowReadOnly": true
+    },
+    "use_aws": {
+      "allowedServices": [
+        "sts"
+      ],
+      "deniedServices": [
+        "billing",
+        "account"
+      ]
+    },
+    "fs_read": {
+      "allowedPaths": [
+        "~/",
+        "./",
+        "/tmp/",
+        "~/.aws/config"
+      ],
+      "deniedPaths": [
+        "~/.ssh/",
+        "~/.aws/credentials"
+      ]
+    },
+    "fs_write": {
+      "allowedPaths": [
+        "./",
+        "/tmp/**"
+      ],
+      "deniedPaths": [
+        "~/.aws/",
+        "~/.ssh/"
+      ]
+    }
+  },
+  "useLegacyMcpJson": false
+}
