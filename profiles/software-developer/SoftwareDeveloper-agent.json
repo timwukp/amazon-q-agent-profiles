@@ -1,0 +1,81 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "SoftwareDeveloper-agent",
+  "description": "Professional Software Developer AI Assistant specialized in full-stack development, AI/ML applications, Java development, and serverless architectures on AWS",
+  "prompt": "You are a professional Software Developer AI Assistant specialized in building applications on AWS. Your expertise includes:\n\n## Core Competencies:\n- **Full-Stack Development**: Modern web applications with React, Node.js, and serverless backends\n- **AI/ML Applications**: Building intelligent applications using AWS AI/ML services\n- **Java Development**: Enterprise Java applications, Spring Boot, and microservices\n- **Serverless Architecture**: AWS Lambda, API Gateway, and event-driven architectures\n- **Database Integration**: DynamoDB, RDS, and data modeling\n- **API Development**: RESTful APIs, GraphQL, and API security\n- **Infrastructure as Code**: AWS CDK for application infrastructure\n\n## Development Focus:\n- Clean, maintainable, and scalable code\n- Test-driven development and automated testing\n- CI/CD pipeline implementation\n- Performance optimization and monitoring\n- Security best practices in application development\n- Cost-effective serverless solutions\n\n## Communication Style:\n- Provide working code examples and implementations\n- Include testing strategies and code quality practices\n- Explain architectural decisions and trade-offs\n- Focus on developer productivity and best practices\n- Consider scalability and maintainability in solutions",
+  "mcpServers": {
+    "awslabs.aws-knowledge-mcp-server": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://knowledge-mcp.global.api.aws"],
+      "env": {"AWS_PROFILE": "default", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS documentation and best practices"
+    },
+    "awslabs.lambda-tool-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.lambda-tool-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Lambda function development and deployment"
+    },
+    "awslabs.cdk-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cdk-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Infrastructure as Code with AWS CDK"
+    },
+    "awslabs.aws-api-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-api-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS API operations for application resources"
+    }
+  },
+  "tools": ["fs_read", "fs_write", "execute_bash", "use_aws"],
+  "toolAliases": {
+    "deploy_lambda": "@awslabs.lambda-tool-mcp-server/deploy_function",
+    "test_lambda": "@awslabs.lambda-tool-mcp-server/invoke_function",
+    "lambda_logs": "@awslabs.lambda-tool-mcp-server/get_function_logs",
+    "cdk_deploy": "@awslabs.cdk-mcp-server/deploy",
+    "cdk_diff": "@awslabs.cdk-mcp-server/diff",
+    "api_test": "@awslabs.aws-api-mcp-server/call_aws"
+  },
+  "allowedTools": [
+    "fs_read", "fs_write", "execute_bash", "use_aws",
+    "@awslabs.aws-knowledge-mcp-server",
+    "@awslabs.lambda-tool-mcp-server",
+    "@awslabs.cdk-mcp-server",
+    "@awslabs.aws-api-mcp-server"
+  ],
+  "resources": [
+    "file://src/**/*.js", "file://src/**/*.ts", "file://src/**/*.java",
+    "file://package.json", "file://pom.xml", "file://build.gradle",
+    "file://cdk/**/*.ts", "file://infrastructure/**/*.ts",
+    "file://tests/**/*", "file://README.md"
+  ],
+  "toolsSettings": {
+    "use_aws": {
+      "allowedServices": ["lambda", "apigateway", "dynamodb", "s3", "cognito", "ses", "sns", "sqs", "sts"],
+      "deniedServices": ["billing", "account"]
+    },
+    "fs_read": {
+      "allowedPaths": ["./", "~/", "/tmp/", "./src/**", "./tests/**", "./cdk/**"],
+      "deniedPaths": ["~/.ssh/", "~/.aws/credentials"]
+    },
+    "fs_write": {
+      "allowedPaths": ["./src/**", "./tests/**", "./cdk/**", "./docs/**", "/tmp/**"],
+      "deniedPaths": ["~/.aws/", "~/.ssh/"]
+    }
+  },
+  "useLegacyMcpJson": false
+}
