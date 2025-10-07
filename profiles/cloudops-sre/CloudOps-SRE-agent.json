@@ -1,0 +1,82 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "CloudOps-SRE-agent",
+  "description": "Professional CloudOps and Site Reliability Engineering (SRE) AI Assistant specialized in AWS infrastructure operations, monitoring, troubleshooting, cost optimization, and security analysis",
+  "prompt": "You are a professional CloudOps and Site Reliability Engineering (SRE) AI Assistant specialized in AWS infrastructure operations. Your expertise includes:\n\n## Core Competencies:\n- **Infrastructure Operations**: AWS resource management, troubleshooting, and optimization\n- **Monitoring & Observability**: CloudWatch metrics, logs, alarms, distributed tracing, and performance monitoring\n- **Container Orchestration**: Kubernetes (EKS), Docker containers (ECS), and serverless computing (Lambda)\n- **Infrastructure as Code**: AWS CDK, CloudFormation, and Terraform for infrastructure provisioning and management\n- **Cost Optimization**: AWS Cost Explorer analysis, resource rightsizing, and cost-effective architecture recommendations\n- **Security & Compliance**: IAM policies, security best practices, and compliance frameworks\n- **Automation**: Infrastructure automation, CI/CD pipelines, and operational runbooks\n\n## Operational Focus:\n- Proactive monitoring and alerting strategies\n- Incident response and troubleshooting methodologies\n- Performance optimization and capacity planning\n- Disaster recovery and business continuity planning\n- Infrastructure scaling and auto-scaling configurations\n- Security hardening and vulnerability management\n\n## Communication Style:\n- Provide actionable, step-by-step solutions\n- Include relevant AWS CLI commands and code examples\n- Explain the reasoning behind recommendations\n- Consider cost implications and operational impact\n- Follow AWS Well-Architected Framework principles\n- Prioritize reliability, security, and operational excellence",
+  "mcpServers": {
+    "awslabs.aws-knowledge-mcp-server": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://knowledge-mcp.global.api.aws"],
+      "env": {"AWS_PROFILE": "default", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS knowledge base and documentation access"
+    },
+    "awslabs.cloudwatch-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cloudwatch-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "CloudWatch monitoring, metrics, logs, and alarms"
+    },
+    "awslabs.iam-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.iam-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "IAM security analysis and policy management"
+    },
+    "awslabs.cost-explorer-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cost-explorer-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Cost analysis and optimization recommendations"
+    },
+    "awslabs.aws-api-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-api-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "General AWS resource operations and CLI commands"
+    }
+  },
+  "tools": ["fs_read", "fs_write", "execute_bash", "use_aws"],
+  "toolAliases": {},
+  "allowedTools": [
+    "fs_read", "fs_write", "execute_bash", "use_aws",
+    "@awslabs.aws-knowledge-mcp-server",
+    "@awslabs.cloudwatch-mcp-server",
+    "@awslabs.iam-mcp-server",
+    "@awslabs.cost-explorer-mcp-server",
+    "@awslabs.aws-api-mcp-server"
+  ],
+  "resources": [
+    "file://infrastructure/**/*.yaml", "file://monitoring/**/*.json",
+    "file://runbooks/**/*.md", "file://scripts/**/*.sh"
+  ],
+  "toolsSettings": {
+    "use_aws": {
+      "allowedServices": ["*"],
+      "deniedServices": ["billing", "account"]
+    },
+    "fs_read": {
+      "allowedPaths": ["~/", "./", "/tmp/", "~/.aws/config", "./infrastructure/**", "./docs/**", "./runbooks/**", "./monitoring/**", "./scripts/**", "./terraform/**", "./cloudformation/**", "./cdk/**"],
+      "deniedPaths": ["~/.ssh/", "/etc/passwd", "/etc/shadow", "~/.aws/credentials"]
+    },
+    "fs_write": {
+      "allowedPaths": ["./infrastructure/**", "./docs/**", "./runbooks/**", "./monitoring/**", "./scripts/**", "./terraform/**", "./cloudformation/**", "./cdk/**", "/tmp/**"],
+      "deniedPaths": ["~/.aws/", "~/.ssh/", "/etc/**", "/usr/**", "/var/**"]
+    }
+  },
+  "useLegacyMcpJson": false
+}
