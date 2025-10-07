@@ -1,0 +1,74 @@
+{
+  "agent": "software-developer",
+  "description": "Test prompts for Software Developer agent focusing on full-stack development, serverless architectures, and Java development",
+  "test_prompts": [
+    {
+      "id": "serverless-001",
+      "category": "lambda-development",
+      "prompt": "Create a Lambda function for processing S3 events with error handling, logging, and performance optimization.",
+      "expected_capabilities": ["lambda-development", "error-handling", "performance-optimization"]
+    },
+    {
+      "id": "api-001",
+      "category": "api-gateway",
+      "prompt": "Design and implement a REST API using API Gateway and Lambda for a customer management system.",
+      "expected_capabilities": ["api-design", "lambda-integration", "authentication"]
+    },
+    {
+      "id": "fullstack-001",
+      "category": "react-aws",
+      "prompt": "Develop a React frontend with AWS Amplify backend for a task management application.",
+      "expected_capabilities": ["frontend-development", "backend-integration", "authentication"]
+    },
+    {
+      "id": "java-001",
+      "category": "spring-boot",
+      "prompt": "Create a Spring Boot application with AWS SDK integration for managing S3 objects and DynamoDB data.",
+      "expected_capabilities": ["java-development", "aws-sdk-integration", "spring-boot"]
+    },
+    {
+      "id": "java-002",
+      "category": "microservices",
+      "prompt": "Design and implement Java microservices architecture using Spring Boot, API Gateway, and ECS.",
+      "expected_capabilities": ["microservices-design", "containerization", "service-communication"]
+    },
+    {
+      "id": "ai-001",
+      "category": "ml-integration",
+      "prompt": "Integrate a SageMaker model into a web application for real-time predictions with A/B testing.",
+      "expected_capabilities": ["model-integration", "api-development", "ab-testing"]
+    },
+    {
+      "id": "ai-002",
+      "category": "computer-vision",
+      "prompt": "Create a computer vision application using Amazon Rekognition for image analysis and content moderation.",
+      "expected_capabilities": ["image-processing", "rekognition-integration", "content-filtering"]
+    },
+    {
+      "id": "data-001",
+      "category": "real-time-dashboard",
+      "prompt": "Create a real-time dashboard using React, WebSockets, and Kinesis for monitoring application metrics.",
+      "expected_capabilities": ["dashboard-development", "real-time-updates", "data-visualization"]
+    },
+    {
+      "id": "cicd-001",
+      "category": "automated-testing",
+      "prompt": "Design and implement automated testing strategy including unit, integration, and end-to-end tests for a serverless application.",
+      "expected_capabilities": ["testing-framework", "test-automation", "cicd-integration"]
+    },
+    {
+      "id": "security-001",
+      "category": "authentication",
+      "prompt": "Implement OAuth 2.0 authentication using Amazon Cognito with role-based access control.",
+      "expected_capabilities": ["authentication-implementation", "rbac", "security-best-practices"]
+    }
+  ],
+  "validation_criteria": {
+    "development_proficiency": "Demonstrates full-stack development skills with multiple programming languages",
+    "aws_integration": "Uses appropriate AWS services with proper integration and best practices",
+    "application_architecture": "Designs scalable applications with proper error handling and security",
+    "testing_quality": "Implements comprehensive testing strategies with appropriate frameworks",
+    "security_compliance": "Uses secure coding practices with placeholder data only"
+  },
+  "security_notes": "All test scenarios use placeholder data - no real credentials or sensitive information"
+}
