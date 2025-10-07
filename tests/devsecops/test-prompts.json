@@ -1,0 +1,86 @@
+{
+  "agent": "devsecops",
+  "description": "Test prompts for DevSecOps agent focusing on secure CI/CD pipelines, security tooling, and compliance automation",
+  "test_prompts": [
+    {
+      "id": "pipeline-001",
+      "category": "secure-cicd",
+      "prompt": "Design a secure CI/CD pipeline with automated security scanning, vulnerability assessment, and compliance checks.",
+      "expected_capabilities": ["pipeline-security", "automated-scanning", "compliance-integration"]
+    },
+    {
+      "id": "scanning-001",
+      "category": "sast-dast",
+      "prompt": "Integrate SAST and DAST tools into CodePipeline for automated security testing of web applications.",
+      "expected_capabilities": ["static-analysis", "dynamic-testing", "pipeline-integration"]
+    },
+    {
+      "id": "container-001",
+      "category": "container-security",
+      "prompt": "Set up automated container security scanning in CI/CD pipeline using Amazon ECR image scanning and third-party tools.",
+      "expected_capabilities": ["container-scanning", "vulnerability-management", "policy-enforcement"]
+    },
+    {
+      "id": "iac-001",
+      "category": "infrastructure-security",
+      "prompt": "Implement security scanning for CloudFormation and CDK templates to detect misconfigurations and security issues.",
+      "expected_capabilities": ["iac-scanning", "policy-validation", "remediation-guidance"]
+    },
+    {
+      "id": "compliance-001",
+      "category": "soc2-automation",
+      "prompt": "Implement automated SOC 2 compliance monitoring using AWS Config rules and custom compliance checks.",
+      "expected_capabilities": ["compliance-automation", "config-rules", "automated-remediation"]
+    },
+    {
+      "id": "gitops-001",
+      "category": "secure-gitops",
+      "prompt": "Design a secure GitOps workflow using AWS CodeCommit, CodeBuild, and ArgoCD with proper access controls.",
+      "expected_capabilities": ["gitops-security", "access-controls", "deployment-security"]
+    },
+    {
+      "id": "secrets-001",
+      "category": "secret-management",
+      "prompt": "Implement secure secret management in GitOps workflow using AWS Secrets Manager and external-secrets operator.",
+      "expected_capabilities": ["secret-management", "rotation-policies", "access-controls"]
+    },
+    {
+      "id": "monitoring-001",
+      "category": "siem-implementation",
+      "prompt": "Set up a SIEM solution using Amazon Security Lake, GuardDuty, and custom security analytics for threat detection.",
+      "expected_capabilities": ["siem-architecture", "threat-detection", "log-aggregation"]
+    },
+    {
+      "id": "incident-001",
+      "category": "incident-response",
+      "prompt": "Create automated incident response workflows for common security events using Lambda and Step Functions.",
+      "expected_capabilities": ["response-automation", "playbooks", "escalation-procedures"]
+    },
+    {
+      "id": "zerotrust-001",
+      "category": "zero-trust",
+      "prompt": "Design and implement a zero trust architecture for microservices using service mesh and identity-based access controls.",
+      "expected_capabilities": ["zero-trust-design", "identity-verification", "micro-segmentation"]
+    },
+    {
+      "id": "testing-001",
+      "category": "penetration-testing",
+      "prompt": "Integrate automated penetration testing tools into CI/CD pipeline for continuous security validation.",
+      "expected_capabilities": ["testing-automation", "vulnerability-reporting", "remediation-tracking"]
+    },
+    {
+      "id": "orchestration-001",
+      "category": "security-orchestration",
+      "prompt": "Build a security orchestration platform that integrates multiple security tools and automates response workflows.",
+      "expected_capabilities": ["tool-integration", "workflow-automation", "centralized-management"]
+    }
+  ],
+  "validation_criteria": {
+    "security_integration": "Integrates security tools into CI/CD pipelines with comprehensive coverage",
+    "compliance_automation": "Implements automated compliance monitoring with audit trails",
+    "gitops_security": "Implements secure GitOps workflows with proper secret management",
+    "incident_response": "Provides automated incident response with threat detection",
+    "security_architecture": "Implements zero trust principles with proper access controls"
+  },
+  "security_notes": "All test scenarios use placeholder data - no real credentials or sensitive security information"
+}
