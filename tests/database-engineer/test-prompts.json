@@ -1,0 +1,86 @@
+{
+  "agent": "database-engineer",
+  "description": "Test prompts for Database Engineer agent focusing on SQL development, database migration, and performance tuning",
+  "test_prompts": [
+    {
+      "id": "sql-001",
+      "category": "query-optimization",
+      "prompt": "Optimize this SQL query that's taking 30+ seconds: SELECT * FROM orders o JOIN customers c ON o.customer_id = c.id WHERE o.order_date > '2023-01-01' AND c.region = 'US';",
+      "expected_capabilities": ["query-analysis", "index-recommendations", "execution-plan-optimization"]
+    },
+    {
+      "id": "sql-002",
+      "category": "stored-procedures",
+      "prompt": "Create a stored procedure for calculating customer lifetime value with monthly aggregations and trend analysis.",
+      "expected_capabilities": ["stored-procedure-development", "error-handling", "performance-considerations"]
+    },
+    {
+      "id": "migration-001",
+      "category": "oracle-to-aws",
+      "prompt": "Plan migration of a 2TB Oracle database to AWS RDS. Current setup: Oracle 19c, 50+ tables, heavy OLTP workload.",
+      "expected_capabilities": ["migration-strategy", "service-selection", "downtime-minimization"]
+    },
+    {
+      "id": "migration-002",
+      "category": "dms-setup",
+      "prompt": "Set up AWS DMS for migrating Oracle database to Aurora PostgreSQL with minimal downtime.",
+      "expected_capabilities": ["dms-configuration", "endpoint-setup", "migration-tasks"]
+    },
+    {
+      "id": "performance-001",
+      "category": "rds-tuning",
+      "prompt": "Optimize RDS MySQL performance for a high-traffic application experiencing slow query response times.",
+      "expected_capabilities": ["parameter-tuning", "monitoring-setup", "performance-insights"]
+    },
+    {
+      "id": "performance-002",
+      "category": "aurora-optimization",
+      "prompt": "Tune Aurora PostgreSQL cluster for mixed OLTP/OLAP workloads with read replicas.",
+      "expected_capabilities": ["cluster-configuration", "read-replica-optimization", "workload-separation"]
+    },
+    {
+      "id": "backup-001",
+      "category": "backup-strategy",
+      "prompt": "Design a backup and recovery strategy for mission-critical RDS databases with RPO of 15 minutes.",
+      "expected_capabilities": ["backup-configuration", "point-in-time-recovery", "cross-region-backups"]
+    },
+    {
+      "id": "security-001",
+      "category": "database-security",
+      "prompt": "Implement comprehensive security for RDS databases including encryption, access controls, and audit logging.",
+      "expected_capabilities": ["encryption-setup", "iam-integration", "audit-configuration"]
+    },
+    {
+      "id": "monitoring-001",
+      "category": "database-monitoring",
+      "prompt": "Set up comprehensive monitoring and alerting for RDS and Aurora databases using CloudWatch.",
+      "expected_capabilities": ["monitoring-configuration", "custom-metrics", "alerting-thresholds"]
+    },
+    {
+      "id": "warehouse-001",
+      "category": "redshift-design",
+      "prompt": "Design a Redshift cluster for analytics workloads processing 10TB of data with complex queries.",
+      "expected_capabilities": ["cluster-sizing", "distribution-keys", "sort-keys", "compression"]
+    },
+    {
+      "id": "automation-001",
+      "category": "maintenance-automation",
+      "prompt": "Automate routine database maintenance tasks including backups, statistics updates, and index maintenance.",
+      "expected_capabilities": ["automation-scripts", "scheduling", "monitoring", "error-handling"]
+    },
+    {
+      "id": "advanced-001",
+      "category": "multi-master",
+      "prompt": "Configure Aurora multi-master cluster for global applications with write scaling requirements.",
+      "expected_capabilities": ["multi-master-setup", "conflict-resolution", "application-integration"]
+    }
+  ],
+  "validation_criteria": {
+    "sql_expertise": "Demonstrates advanced SQL skills and optimization techniques",
+    "migration_proficiency": "Shows Oracle to AWS migration expertise with appropriate tools",
+    "performance_tuning": "Identifies bottlenecks and provides optimization recommendations",
+    "database_administration": "Implements proper backup, security, and monitoring strategies",
+    "security_compliance": "Uses placeholder data and implements proper security controls"
+  },
+  "security_notes": "All test scenarios use placeholder data - no real database credentials or sensitive information"
+}
