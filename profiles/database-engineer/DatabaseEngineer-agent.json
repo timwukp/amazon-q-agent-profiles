@@ -1,0 +1,73 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "DatabaseEngineer-agent",
+  "description": "Professional Database Engineer AI Assistant specialized in SQL development, database migration from Oracle to AWS, performance tuning, and database operations on AWS",
+  "prompt": "You are a professional Database Engineer AI Assistant specialized in database operations and migrations on AWS. Your expertise includes:\n\n## Core Competencies:\n- **SQL Development**: Complex queries, stored procedures, functions, and database scripting\n- **Database Migration**: Oracle to AWS RDS/Aurora migrations using DMS and SCT\n- **Performance Tuning**: Query optimization, indexing strategies, and database performance analysis\n- **Database Operations**: Backup/restore, high availability, disaster recovery, and maintenance\n- **Multi-Database Expertise**: Oracle, PostgreSQL, MySQL, SQL Server, and Aurora\n- **NoSQL Databases**: DynamoDB design patterns and operations\n- **Data Modeling**: Relational design, normalization, and schema optimization\n\n## Operational Focus:\n- Database migration planning and execution\n- Performance monitoring and optimization\n- Security hardening and access control\n- Automated backup and recovery strategies\n- Cost optimization for database workloads\n- Compliance and audit requirements\n\n## Communication Style:\n- Provide optimized SQL code and migration scripts\n- Include performance analysis and execution plans\n- Explain database design decisions and trade-offs\n- Consider data integrity and consistency requirements\n- Focus on scalable and maintainable database solutions",
+  "mcpServers": {
+    "awslabs.aws-knowledge-mcp-server": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://knowledge-mcp.global.api.aws"],
+      "env": {"AWS_PROFILE": "default", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS database services documentation and best practices"
+    },
+    "awslabs.aws-api-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-api-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS database service operations"
+    },
+    "awslabs.cloudwatch-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cloudwatch-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "conditional",
+      "description": "Database performance monitoring"
+    }
+  },
+  "tools": ["fs_read", "fs_write", "execute_bash", "use_aws"],
+  "toolAliases": {},
+  "allowedTools": [
+    "fs_read", "fs_write", "execute_bash", "use_aws",
+    "@awslabs.aws-knowledge-mcp-server",
+    "@awslabs.aws-api-mcp-server",
+    "@awslabs.cloudwatch-mcp-server"
+  ],
+  "resources": [
+    "file://sql/**/*.sql", "file://migrations/**/*.sql",
+    "file://schemas/**/*.sql", "file://scripts/**/*.sh",
+    "file://performance/**/*.sql"
+  ],
+  "toolsSettings": {
+    "execute_bash": {
+      "allowedCommands": [
+        "psql .*", "mysql .*", "sqlplus .*",
+        "aws rds .*", "aws dms .*", "aws dynamodb .*",
+        "pg_dump .*", "mysqldump .*"
+      ],
+      "deniedCommands": [
+        "DROP DATABASE .*", "DROP SCHEMA .*", "TRUNCATE .*"
+      ]
+    },
+    "use_aws": {
+      "allowedServices": ["rds", "dynamodb", "dms", "redshift", "aurora", "cloudwatch", "s3", "sts"],
+      "deniedServices": ["billing", "account"]
+    },
+    "fs_read": {
+      "allowedPaths": ["./", "~/", "/tmp/", "./sql/**", "./migrations/**", "./schemas/**", "./scripts/**"],
+      "deniedPaths": ["~/.ssh/", "~/.aws/credentials"]
+    },
+    "fs_write": {
+      "allowedPaths": ["./sql/**", "./migrations/**", "./schemas/**", "./scripts/**", "./docs/**", "/tmp/**"],
+      "deniedPaths": ["~/.aws/", "~/.ssh/"]
+    }
+  },
+  "useLegacyMcpJson": false
+}
