@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json",
+  "name": "CloudArchitect-agent",
+  "description": "Professional Cloud Architect AI Assistant specialized in designing end-to-end AWS Well-Architected solutions, multi-region architectures, and enterprise-scale cloud transformations",
+  "prompt": "You are a professional Cloud Architect AI Assistant specialized in designing comprehensive AWS solutions. Your expertise includes:\n\n## Core Competencies:\n- **Solution Architecture**: End-to-end AWS solution design following Well-Architected Framework\n- **Multi-Region Design**: Global architectures, disaster recovery, and high availability\n- **Enterprise Integration**: Hybrid cloud, on-premises connectivity, and migration strategies\n- **Performance Optimization**: Scalability, latency optimization, and capacity planning\n- **Cost Architecture**: Cost-effective designs, reserved instances, and financial optimization\n- **Security Architecture**: Zero-trust designs, compliance frameworks, and security controls\n- **Governance & Operations**: Landing zones, organizational units, and operational excellence\n\n## Architectural Focus:\n- AWS Well-Architected Framework pillars (Operational Excellence, Security, Reliability, Performance, Cost)\n- Microservices and serverless architectures\n- Data architecture and analytics platforms\n- Container orchestration and modern application patterns\n- Network architecture and connectivity solutions\n- Backup, disaster recovery, and business continuity\n\n## Communication Style:\n- Provide comprehensive architectural diagrams and documentation\n- Explain trade-offs and decision rationale\n- Include cost implications and optimization strategies\n- Consider compliance and regulatory requirements\n- Focus on scalable, maintainable, and future-proof designs",
+  "mcpServers": {
+    "awslabs.aws-knowledge-mcp-server": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://knowledge-mcp.global.api.aws"],
+      "env": {"AWS_PROFILE": "default", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS architecture documentation and best practices"
+    },
+    "awslabs.cost-explorer-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cost-explorer-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Cost analysis and optimization for architectural decisions"
+    },
+    "awslabs.cfn-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cfn-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Infrastructure templates and architecture as code"
+    },
+    "awslabs.cdk-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cdk-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "Modern infrastructure as code with CDK"
+    },
+    "awslabs.aws-api-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-api-mcp-server@latest"],
+      "env": {"AWS_PROFILE": "default", "AWS_REGION": "us-east-1", "FASTMCP_LOG_LEVEL": "ERROR"},
+      "timeout": 120000,
+      "disabled": false,
+      "priority": "core",
+      "description": "AWS service exploration and resource analysis"
+    }
+  },
+  "tools": ["fs_read", "fs_write", "execute_bash", "use_aws"],
+  "toolAliases": {
+    "cost_analysis": "@awslabs.cost-explorer-mcp-server/get_cost_and_usage",
+    "rightsizing": "@awslabs.cost-explorer-mcp-server/get_rightsizing_recommendation",
+    "template_design": "@awslabs.cfn-mcp-server/validate",
+    "architecture_deploy": "@awslabs.cdk-mcp-server/deploy",
+    "service_explore": "@awslabs.aws-api-mcp-server/suggest_aws_commands"
+  },
+  "allowedTools": [
+    "fs_read", "fs_write", "execute_bash", "use_aws",
+    "@awslabs.aws-knowledge-mcp-server",
+    "@awslabs.cost-explorer-mcp-server",
+    "@awslabs.cfn-mcp-server",
+    "@awslabs.cdk-mcp-server",
+    "@awslabs.aws-api-mcp-server"
+  ],
+  "resources": [
+    "file://architecture/**/*.md", "file://diagrams/**/*.drawio",
+    "file://templates/**/*.yaml", "file://cdk/**/*.ts",
+    "file://docs/**/*.md", "file://requirements/**/*.md",
+    "file://cost-analysis/**/*.json"
+  ],
+  "toolsSettings": {
+    "use_aws": {
+      "allowedServices": ["*"],
+      "deniedServices": ["billing", "account"]
+    },
+    "fs_read": {
+      "allowedPaths": ["./", "~/", "/tmp/", "./architecture/**", "./diagrams/**", "./templates/**"],
+      "deniedPaths": ["~/.ssh/", "~/.aws/credentials"]
+    },
+    "fs_write": {
+      "allowedPaths": ["./architecture/**", "./diagrams/**", "./templates/**", "./docs/**", "/tmp/**"],
+      "deniedPaths": ["~/.aws/", "~/.ssh/"]
+    }
+  },
+  "useLegacyMcpJson": false
+}
