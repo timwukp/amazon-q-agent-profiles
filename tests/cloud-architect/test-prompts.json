@@ -1,0 +1,74 @@
+{
+  "agent": "cloud-architect",
+  "description": "Test prompts for Cloud Architect agent focusing on solution architecture and Well-Architected Framework",
+  "test_prompts": [
+    {
+      "id": "arch-001",
+      "category": "well-architected",
+      "prompt": "Assess this 3-tier web application architecture for Well-Architected compliance: ALB -> EC2 instances -> RDS MySQL. Identify gaps in each pillar.",
+      "expected_capabilities": ["well-architected-analysis", "security-assessment", "cost-optimization"]
+    },
+    {
+      "id": "arch-002",
+      "category": "multi-region",
+      "prompt": "Design a multi-region architecture for a critical e-commerce platform with RTO of 1 hour and RPO of 15 minutes.",
+      "expected_capabilities": ["disaster-recovery", "cross-region-design", "availability-planning"]
+    },
+    {
+      "id": "arch-003",
+      "category": "microservices",
+      "prompt": "Help decompose this monolithic order management system into microservices. Current components: user auth, inventory, payment, shipping, notifications.",
+      "expected_capabilities": ["microservices-design", "api-architecture", "data-patterns"]
+    },
+    {
+      "id": "arch-004",
+      "category": "security",
+      "prompt": "Design a zero trust network architecture for a financial services application handling PCI DSS data.",
+      "expected_capabilities": ["zero-trust-design", "compliance-architecture", "network-security"]
+    },
+    {
+      "id": "arch-005",
+      "category": "performance",
+      "prompt": "Design auto-scaling for a video streaming platform that experiences 10x traffic spikes during live events.",
+      "expected_capabilities": ["auto-scaling-design", "performance-optimization", "load-balancing"]
+    },
+    {
+      "id": "arch-006",
+      "category": "cost-optimization",
+      "prompt": "Optimize this architecture for cost: 24/7 web servers, over-provisioned RDS, unoptimized storage. Current spend: $50K/month.",
+      "expected_capabilities": ["cost-analysis", "resource-optimization", "reserved-instances"]
+    },
+    {
+      "id": "arch-007",
+      "category": "serverless",
+      "prompt": "Plan migration of this CRUD API from EC2 to serverless. Current: 4 EC2 instances, MySQL RDS, Redis cache.",
+      "expected_capabilities": ["serverless-design", "migration-planning", "cost-comparison"]
+    },
+    {
+      "id": "arch-008",
+      "category": "hybrid-cloud",
+      "prompt": "Design hybrid architecture connecting on-premises data center to AWS for gradual cloud migration.",
+      "expected_capabilities": ["hybrid-connectivity", "migration-strategy", "network-design"]
+    },
+    {
+      "id": "arch-009",
+      "category": "monitoring",
+      "prompt": "Design monitoring and alerting for a distributed system with 20 microservices, focusing on SLA compliance.",
+      "expected_capabilities": ["observability-design", "sla-monitoring", "alerting-strategy"]
+    },
+    {
+      "id": "arch-010",
+      "category": "disaster-recovery",
+      "prompt": "Design a disaster recovery testing strategy for a multi-tier application with 99.9% availability SLA.",
+      "expected_capabilities": ["dr-planning", "testing-automation", "availability-design"]
+    }
+  ],
+  "validation_criteria": {
+    "architecture_principles": "Solutions follow AWS Well-Architected Framework",
+    "scalability": "Designs handle specified load requirements",
+    "security": "Implements defense in depth and least privilege",
+    "cost_awareness": "Considers cost optimization opportunities",
+    "operational_excellence": "Includes monitoring, automation, and documentation"
+  },
+  "security_notes": "All test scenarios use placeholder data - no real credentials or sensitive information"
+}
