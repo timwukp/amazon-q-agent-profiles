@@ -1,0 +1,86 @@
+{
+  "agent": "data-engineer",
+  "description": "Test prompts for Data Engineer agent focusing on ML modeling, data pipelines, and PySpark development",
+  "test_prompts": [
+    {
+      "id": "ml-001",
+      "category": "sagemaker-training",
+      "prompt": "Set up a SageMaker training job for a customer churn prediction model using XGBoost with hyperparameter tuning.",
+      "expected_capabilities": ["sagemaker-training", "hyperparameter-tuning", "model-artifacts"]
+    },
+    {
+      "id": "ml-002",
+      "category": "model-deployment",
+      "prompt": "Deploy the trained churn prediction model to a SageMaker endpoint with auto-scaling capabilities.",
+      "expected_capabilities": ["model-deployment", "auto-scaling", "endpoint-monitoring"]
+    },
+    {
+      "id": "data-001",
+      "category": "emr-processing",
+      "prompt": "Set up an EMR cluster for processing 100GB of daily transaction data using Spark.",
+      "expected_capabilities": ["emr-configuration", "spark-optimization", "cost-management"]
+    },
+    {
+      "id": "data-002",
+      "category": "pyspark-development",
+      "prompt": "Write a PySpark job to clean and aggregate customer transaction data, handling null values and outliers.",
+      "expected_capabilities": ["pyspark-coding", "data-quality", "performance-optimization"]
+    },
+    {
+      "id": "pipeline-001",
+      "category": "data-lake",
+      "prompt": "Design a data lake architecture on S3 for storing structured and unstructured data with proper partitioning.",
+      "expected_capabilities": ["data-lake-design", "partitioning-strategy", "metadata-management"]
+    },
+    {
+      "id": "mlops-001",
+      "category": "model-registry",
+      "prompt": "Set up SageMaker Model Registry for managing model versions and approval workflows.",
+      "expected_capabilities": ["model-versioning", "approval-workflows", "registry-management"]
+    },
+    {
+      "id": "mlops-002",
+      "category": "automated-retraining",
+      "prompt": "Create an automated pipeline that retrains the model when data drift is detected.",
+      "expected_capabilities": ["drift-detection", "automated-retraining", "model-comparison"]
+    },
+    {
+      "id": "feature-001",
+      "category": "feature-store",
+      "prompt": "Implement a feature store using SageMaker Feature Store for customer behavioral features.",
+      "expected_capabilities": ["feature-store-design", "feature-groups", "online-offline-stores"]
+    },
+    {
+      "id": "analytics-001",
+      "category": "real-time-analytics",
+      "prompt": "Create a real-time analytics pipeline using Kinesis and QuickSight for monitoring customer behavior.",
+      "expected_capabilities": ["kinesis-configuration", "real-time-processing", "dashboard-design"]
+    },
+    {
+      "id": "optimization-001",
+      "category": "cost-optimization",
+      "prompt": "Analyze and optimize costs for SageMaker training and inference workloads.",
+      "expected_capabilities": ["cost-analysis", "optimization-strategies", "resource-scheduling"]
+    },
+    {
+      "id": "advanced-001",
+      "category": "multi-model-endpoints",
+      "prompt": "Deploy multiple ML models on a single SageMaker multi-model endpoint for cost optimization.",
+      "expected_capabilities": ["multi-model-configuration", "model-loading", "resource-sharing"]
+    },
+    {
+      "id": "streaming-001",
+      "category": "stream-processing",
+      "prompt": "Create a real-time data processing pipeline using Kinesis Data Streams and Lambda for fraud detection.",
+      "expected_capabilities": ["stream-processing", "real-time-inference", "alerting"]
+    }
+  ],
+  "validation_criteria": {
+    "ml_engineering": "Implements MLOps best practices and SageMaker services",
+    "data_engineering": "Demonstrates big data processing and pipeline skills",
+    "python_pyspark": "Shows proficiency in Python and PySpark development",
+    "infrastructure": "Considers cost optimization and performance tuning",
+    "security": "Implements proper security controls and uses placeholder data"
+  },
+  "security_notes": "All test scenarios use placeholder data - no real credentials or sensitive information"
+}
