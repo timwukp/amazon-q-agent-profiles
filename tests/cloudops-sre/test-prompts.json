@@ -1,0 +1,99 @@
+{
+  "agent_name": "CloudOps-agent",
+  "test_categories": {
+    "initialization": [
+      {
+        "id": "init_001",
+        "prompt": "/mcp",
+        "expected_tools": ["cloudwatch", "iam", "cost-explorer", "eks", "ecs", "lambda-tool"],
+        "validation": "All MCP servers load successfully"
+      }
+    ],
+    "monitoring_observability": [
+      {
+        "id": "mon_001",
+        "prompt": "Analyze CloudWatch metrics for high CPU utilization across EC2 instances in <region>",
+        "expected_tools": ["cloudwatch-mcp-server"],
+        "validation": "Uses CloudWatch MCP server for metrics analysis"
+      },
+      {
+        "id": "mon_002",
+        "prompt": "Set up comprehensive monitoring for a three-tier web application",
+        "expected_elements": ["CloudWatch alarms", "dashboards", "log aggregation", "APM"],
+        "validation": "Provides complete monitoring strategy"
+      }
+    ],
+    "container_orchestration": [
+      {
+        "id": "k8s_001",
+        "prompt": "Troubleshoot pod scheduling issues in EKS cluster <cluster-name>",
+        "expected_tools": ["eks-mcp-server"],
+        "validation": "Uses EKS MCP server for cluster analysis"
+      },
+      {
+        "id": "ecs_001",
+        "prompt": "Optimize ECS service performance and resource utilization",
+        "expected_tools": ["ecs-mcp-server"],
+        "validation": "Uses ECS MCP server for service optimization"
+      }
+    ],
+    "cost_optimization": [
+      {
+        "id": "cost_001",
+        "prompt": "Analyze AWS costs for the last 3 months and provide optimization recommendations",
+        "expected_tools": ["cost-explorer-mcp-server"],
+        "validation": "Uses Cost Explorer MCP server for analysis"
+      },
+      {
+        "id": "cost_002",
+        "prompt": "Implement automated resource rightsizing for EC2 instances",
+        "expected_elements": ["usage analysis", "rightsizing recommendations", "automation"],
+        "validation": "Provides comprehensive rightsizing strategy"
+      }
+    ],
+    "incident_response": [
+      {
+        "id": "inc_001",
+        "prompt": "Create automated incident detection system for application performance degradation",
+        "expected_elements": ["anomaly detection", "alerting", "response automation"],
+        "validation": "Includes complete incident response workflow"
+      }
+    ],
+    "security_monitoring": [
+      {
+        "id": "sec_001",
+        "prompt": "Implement comprehensive security monitoring for AWS infrastructure",
+        "expected_elements": ["GuardDuty", "Security Hub", "CloudTrail", "Config"],
+        "validation": "Covers all security monitoring aspects"
+      },
+      {
+        "id": "iam_001",
+        "prompt": "Audit and optimize IAM permissions across organization",
+        "expected_tools": ["iam-mcp-server"],
+        "validation": "Uses IAM MCP server for access analysis"
+      }
+    ],
+    "serverless_operations": [
+      {
+        "id": "lambda_001",
+        "prompt": "Monitor and optimize Lambda function performance for <function-name>",
+        "expected_tools": ["lambda-tool-mcp-server"],
+        "validation": "Uses Lambda Tool MCP server for optimization"
+      }
+    ],
+    "infrastructure_operations": [
+      {
+        "id": "infra_001",
+        "prompt": "Design disaster recovery procedures with RTO of 2 hours and RPO of 30 minutes",
+        "expected_elements": ["backup strategy", "failover procedures", "testing plan"],
+        "validation": "Provides comprehensive DR strategy"
+      }
+    ]
+  },
+  "security_validation": {
+    "no_hardcoded_secrets": true,
+    "uses_placeholder_data": true,
+    "follows_security_practices": true,
+    "placeholder_examples": ["<cluster-name>", "<function-name>", "<region>", "<instance-id>"]
+  }
+}
